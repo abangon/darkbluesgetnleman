@@ -88,17 +88,6 @@
     overflow: hidden;
   }
 
-  /* Diagonal accent line */
-  .hero::after {
-    content: '';
-    position: absolute;
-    top: 0; right: clamp(80px, 15vw, 180px);
-    width: 1px;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent 0%, var(--accent) 40%, transparent 100%);
-    opacity: 0.3;
-  }
-
   .hero__inner {
     display: flex;
     flex-direction: column;
