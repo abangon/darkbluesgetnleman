@@ -5,446 +5,480 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <!-- ============================================================
-     ARTIST CONFIG 
+     ARTIST CONFIG — меняй только этот блок
      ============================================================ -->
 <script>
   const ARTIST = {
     name:        "Dark Blues Gentleman",
     tagline:     "Swamp blues from the darker side of midnight",
-    bio:         `Some men carry their demons like a fine coat — worn-in, familiar, never quite taken off. Dark Blues Gentleman is the sound of that weight: slow, smoky, and steeped in the mud of something older than memory.\n\nDrawing from the raw tradition of swamp blues and the shadows of jazz noir, each record is a dimly lit room you're not sure you should have entered — but can't bring yourself to leave.`,
-    accentColor: "#C8860A",       
-    bgColor:     "#0A0806",        
-    coverImage:  "https://raw.githubusercontent.com/abangon/darkbluesgetnleman/main/dbg.png",              
-    spotifyArtistId: "53NQtdnowy3eotUzJm91es", 
-    spotifyAlbumId:  "0uiybrS1njkaj6iOpvZ1dd", 
+    accentColor: "#C8860A",
+    bgColor:     "#0A0806",
+    coverImage:  "https://raw.githubusercontent.com/abangon/darkbluesgetnleman/main/dbg.png",
+    spotifyAlbumId: "0uiybrS1njkaj6iOpvZ1dd",
     links: {
       spotify:    "https://open.spotify.com/artist/53NQtdnowy3eotUzJm91es",
       appleMusic: "https://music.apple.com/us/artist/dark-blues-gentleman/1875566110",
       youtube:    "https://music.youtube.com/channel/UCSHa8WJUlDq0RVi9K_6LS7w",
     },
     contactEmail: "press@darkbluesgentleman.com",
-    year:         "2026 Samsara Wheel Records. All rights reserved.",
+    year: "2026",
   };
 </script>
 <!-- ============================================================ -->
 
-<title id="page-title"></title>
-<meta name="description" id="page-desc" content="" />
-
-<!-- Fonts -->
+<title>Dark Blues Gentleman</title>
+<meta name="description" content="Swamp blues from the darker side of midnight" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
 
 <style>
-  /* ─── Tokens ─────────────────────────────────────────────── */
   :root {
-    --accent:   #C8860A;
-    --bg:       #0A0806;
-    --surface:  #111009;
-    --border:   rgba(255,255,255,0.07);
-    --text:     #E8E0D4;
-    --muted:    #7A7060;
-    --ff-head:  'Playfair Display', Georgia, serif;
-    --ff-mono:  'DM Mono', monospace;
-    --max:      960px;
-    --gap:      clamp(2rem, 5vw, 4rem);
+    --accent:  #C8860A;
+    --bg:      #0A0806;
+    --card:    rgba(255,255,255,0.04);
+    --border:  rgba(255,255,255,0.08);
+    --text:    #E8E0D4;
+    --muted:   #7A7060;
+    --ff-head: 'Playfair Display', Georgia, serif;
+    --ff-mono: 'DM Mono', monospace;
   }
 
-  /* ─── Reset ──────────────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { font-size: 16px; scroll-behavior: smooth; }
+  html { font-size: 16px; }
   body {
     background: var(--bg);
     color: var(--text);
     font-family: var(--ff-mono);
     font-weight: 300;
-    line-height: 1.7;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; display: block; }
 
-  /* ─── Noise overlay ──────────────────────────────────────── */
-  body::before {
+  /* ── Background blur ── */
+  .bg-cover {
+    position: fixed; inset: 0; z-index: 0;
+    background-size: cover;
+    background-position: center top;
+    filter: blur(28px) brightness(0.18) saturate(0.6);
+    transform: scale(1.08);
+  }
+
+  /* ── Noise ── */
+  body::after {
     content: '';
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.6;
   }
 
-  /* ─── Layout ─────────────────────────────────────────────── */
-  .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); position: relative; z-index: 1; }
-
-  /* ─── Hero ───────────────────────────────────────────────── */
-  .hero {
-     min-height: min(70vh, 600px);
-    display: grid;
-    grid-template-rows: 1fr auto;
-    padding-top: clamp(3rem, 8vw, 6rem);
-    padding-bottom: clamp(2rem, 4vw, 3rem);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero__inner {
+  /* ── Main column ── */
+  .page {
+    position: relative; z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    padding: 0 1.25rem 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    gap: 1.5rem;
+    gap: 0;
   }
 
-  .hero__label {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--accent);
+  /* ── Hero ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.5rem 0 1.75rem;
+    text-align: center;
+    gap: 0.75rem;
     opacity: 0;
-    animation: fadeUp 0.8s 0.2s forwards;
+    animation: fadeUp 0.7s 0.1s forwards;
   }
 
-  .hero__name {
+  .avatar-wrap {
+    position: relative;
+    width: 88px; height: 88px;
+  }
+  .avatar {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid var(--accent);
+    display: block;
+  }
+  .avatar-ring {
+    position: absolute; inset: -4px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,134,10,0.3);
+  }
+
+  .hero-name {
     font-family: var(--ff-head);
-    font-size: clamp(3.2rem, 10vw, 8rem);
+    font-size: clamp(1.5rem, 6vw, 2rem);
     font-weight: 700;
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.35s forwards;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
   }
-
-  .hero__name em {
+  .hero-name em {
     font-style: italic;
     color: var(--accent);
   }
 
-  .hero__tagline {
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    color: var(--muted);
-    max-width: 38ch;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.55s forwards;
-  }
-
-  .hero__cover {
-    position: absolute;
-    right: 0; top: 0;
-    width: clamp(220px, 38vw, 420px);
-    height: 100%;
-    object-fit: cover;
-    mask-image: linear-gradient(to left, black 0%, black 60%, transparent 90%);
-    -webkit-mask-image: linear-gradient(to left, black 0%, black 60%, transparent 90%);
-    opacity: 0;
-    animation: fadeIn 1.2s 0.1s forwards;
-  }
-
-  .hero__cover-placeholder {
-    position: absolute;
-    right: 0; top: 0;
-    width: clamp(220px, 38vw, 420px);
-    height: 100%;
-    background: linear-gradient(135deg, transparent 0%, var(--accent) 200%);
-    opacity: 0.04;
-  }
-
-  /* Scroll hint */
-  .hero__scroll {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
+  .hero-tagline {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--muted);
-    opacity: 0;
-    animation: fadeUp 0.8s 1s forwards;
-  }
-  .hero__scroll::before {
-    content: '';
-    display: block;
-    width: 40px; height: 1px;
-    background: var(--muted);
   }
 
-  /* ─── Section generic ────────────────────────────────────── */
-  section { padding: var(--gap) 0; }
-
+  /* ── Section label ── */
   .section-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    margin: 1.75rem 0 0.75rem;
   }
 
-  hr.divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
-
-  /* ─── Streaming links ────────────────────────────────────── */
-  .streams {
+  /* ── Stream buttons ── */
+  .stream-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    flex-direction: column;
+    gap: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s forwards;
   }
 
   .stream-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.6rem;
-    padding: 0.65rem 1.25rem;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+    background: var(--card);
     border: 1px solid var(--border);
-    font-family: var(--ff-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text);
-    background: transparent;
+    border-radius: 2px;
     cursor: pointer;
-    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
     position: relative;
     overflow: hidden;
   }
-
   .stream-btn::before {
     content: '';
     position: absolute; inset: 0;
     background: var(--accent);
     transform: translateX(-100%);
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    z-index: -1;
+    z-index: 0;
+  }
+  .stream-btn:hover { border-color: var(--accent); transform: translateX(2px); }
+  .stream-btn:hover::before { transform: translateX(0); }
+  .stream-btn:active { transform: scale(0.98); }
+
+  .stream-btn__icon {
+    width: 20px; height: 20px;
+    fill: var(--text);
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+    transition: fill 0.2s;
+  }
+  .stream-btn:hover .stream-btn__icon { fill: var(--bg); }
+
+  .stream-btn__label {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    position: relative; z-index: 1;
+    transition: color 0.2s;
+    flex: 1;
+  }
+  .stream-btn:hover .stream-btn__label { color: var(--bg); }
+
+  .stream-btn__arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    position: relative; z-index: 1;
+    transition: color 0.2s, transform 0.2s;
+  }
+  .stream-btn:hover .stream-btn__arrow { color: var(--bg); transform: translateX(3px); }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.75rem 0 0;
   }
 
-  .stream-btn:hover { color: var(--bg); border-color: var(--accent); }
-  .stream-btn:hover::before { transform: translateX(0); }
-
-  .stream-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
-
-  /* ─── Spotify embed ──────────────────────────────────────── */
+  /* ── Player ── */
+  .player-section {
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
   .player-wrap {
     border: 1px solid var(--border);
     overflow: hidden;
+    border-radius: 2px;
   }
   .player-wrap iframe { display: block; width: 100%; }
 
-  /* ─── Bio ────────────────────────────────────────────────── */
-  .bio-text {
-    font-family: var(--ff-head);
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    line-height: 1.65;
-    font-weight: 400;
-    color: var(--text);
-    max-width: 60ch;
-    white-space: pre-line;
+  /* ── About ── */
+  .about-section {
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
   }
 
-  /* ─── Contact ────────────────────────────────────────────── */
-  .contact-link {
-    font-size: 0.7rem;
+  .label-tag {
+    display: inline-block;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-lead {
+    font-family: var(--ff-head);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .about-body {
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .about-highlight {
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .tag {
+    font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-  .contact-link:hover { border-color: var(--accent); }
-
-  /* ─── Footer ─────────────────────────────────────────────── */
-  footer {
-    padding: 2rem 0;
-    border-top: 1px solid var(--border);
-  }
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem;
     color: var(--muted);
   }
 
-  /* ─── Animations ─────────────────────────────────────────── */
+  /* ── Contact ── */
+  .contact-section {
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s forwards;
+  }
+
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--ff-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    border-radius: 2px;
+  }
+  .contact-btn:hover { background: var(--accent); color: var(--bg); }
+  .contact-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    opacity: 0.5;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.7s forwards;
+  }
+
+  /* ── Animations ── */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
+    from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s, transform 0.7s;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ─── Responsive ─────────────────────────────────────────── */
-  @media (max-width: 600px) {
-    .hero__cover, .hero__cover-placeholder { display: none; }
-    .hero::after { display: none; }
-    .streams { flex-direction: column; }
-    .stream-btn { justify-content: center; }
+  /* ── Desktop centering ── */
+  @media (min-width: 520px) {
+    body { padding-top: 1rem; }
+    .page { padding: 0 0 3rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero__inner">
-      <p class="hero__label" id="hero-label">Official</p>
-      <h1 class="hero__name" id="hero-name"></h1>
-      <p class="hero__tagline" id="hero-tagline"></p>
+<div class="bg-cover" id="bg-cover"></div>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="avatar-wrap">
+      <img class="avatar" id="avatar" src="" alt="Dark Blues Gentleman" />
+      <div class="avatar-ring"></div>
     </div>
+    <h1 class="hero-name" id="hero-name"></h1>
+    <p class="hero-tagline" id="hero-tagline"></p>
   </div>
-  <div class="container">
-    <span class="hero__scroll">Scroll</span>
-  </div>
-  <!-- Cover image (если задан) -->
-  <img class="hero__cover" id="hero-cover" src="" alt="" />
-  <div class="hero__cover-placeholder" id="hero-placeholder"></div>
-</section>
 
-<hr class="divider" />
+  <!-- STREAMING -->
+  <p class="section-label">Listen on</p>
+  <div class="stream-list" id="stream-list"></div>
 
-<!-- STREAMING -->
-<section>
-  <div class="container reveal">
-    <p class="section-label">Listen now</p>
-    <div class="streams" id="streams-list"></div>
-  </div>
-</section>
+  <hr class="divider" />
 
-<hr class="divider" />
-
-<!-- SPOTIFY PLAYER -->
-<section>
-  <div class="container reveal">
+  <!-- LATEST RELEASE -->
+  <div class="player-section" id="player-section">
     <p class="section-label">Latest release</p>
     <div class="player-wrap" id="player-wrap"></div>
   </div>
-</section>
 
-<hr class="divider" />
+  <hr class="divider" />
 
-<!-- BIO -->
-<section>
-  <div class="container reveal">
+  <!-- ABOUT -->
+  <div class="about-section">
     <p class="section-label">About</p>
-    <p class="bio-text" id="bio-text"></p>
-  </div>
-</section>
+    <span class="label-tag">Samsara Wheel Records</span>
 
-<hr class="divider" />
+    <p class="about-lead">
+      AI-powered music production meets 20+ years of industry expertise.
+    </p>
 
-<!-- CONTACT -->
-<section>
-  <div class="container reveal">
-    <p class="section-label">Press & Booking</p>
-    <a class="contact-link" id="contact-link" href=""></a>
-  </div>
-</section>
+    <p class="about-body">
+      We combine modern generative technology with deep musical knowledge to deliver original tracks fast and cost-effectively — across multiple genres and moods.
+    </p>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <span id="footer-name"></span>
-      <span id="footer-year"></span>
+    <div class="about-highlight">
+      Need original music for your brand, venue, film, or project? We produce custom tracks to order — licensed, delivered quickly, priced for business.
+    </div>
+
+    <p class="about-body">
+      Dark Blues Gentleman is our dark swamp blues project — slow, smoky, steeped in something older than memory. Built for those who listen with the lights off.
+    </p>
+
+    <div class="about-tags">
+      <span class="tag">Brands</span>
+      <span class="tag">Film & TV</span>
+      <span class="tag">Clubs & Venues</span>
+      <span class="tag">Production Studios</span>
+      <span class="tag">Custom Licensing</span>
     </div>
   </div>
-</footer>
 
-<!-- ─── Init script ──────────────────────────────────────────── -->
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <div class="contact-section">
+    <p class="section-label">Press & Licensing</p>
+    <a class="contact-btn" id="contact-btn" href="">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      <span id="contact-label"></span>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <p class="footer" id="footer"></p>
+
+</div>
+
 <script>
-  /* Apply CSS variables from config */
+  /* CSS vars */
   document.documentElement.style.setProperty('--accent', ARTIST.accentColor);
   document.documentElement.style.setProperty('--bg',     ARTIST.bgColor);
 
-  /* Meta */
-  document.getElementById('page-title').textContent = ARTIST.name;
-  document.getElementById('page-desc').setAttribute('content', ARTIST.tagline);
+  /* Background */
+  if (ARTIST.coverImage) {
+    document.getElementById('bg-cover').style.backgroundImage = `url(${ARTIST.coverImage})`;
+    document.getElementById('avatar').src = ARTIST.coverImage;
+  }
 
   /* Hero */
   document.getElementById('hero-name').innerHTML =
-    ARTIST.name.replace(/(\w+)$/, '<em>$1</em>');
+    ARTIST.name.replace(/(\S+)$/, '<em>$1</em>');
   document.getElementById('hero-tagline').textContent = ARTIST.tagline;
 
-  /* Cover image */
-  const coverEl = document.getElementById('hero-cover');
-  const placeholderEl = document.getElementById('hero-placeholder');
-  if (ARTIST.coverImage) {
-    coverEl.src = ARTIST.coverImage;
-    coverEl.alt = ARTIST.name;
-    placeholderEl.style.display = 'none';
-  } else {
-    coverEl.style.display = 'none';
-  }
-
   /* Streaming buttons */
-  const platformData = {
-    spotify:    { label: 'Spotify',      icon: '<svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.563 17.317a.75.75 0 01-1.032.249C13.838 15.7 10.613 15.3 7.21 16.1a.75.75 0 01-.353-1.456c3.717-.9 7.268-.514 10.008 1.044a.75.75 0 01.698 1.629zm1.482-3.303a.937.937 0 01-1.29.31c-2.896-1.78-7.312-2.296-10.733-1.257a.937.937 0 01-.545-1.791c3.914-1.19 8.777-.608 12.13 1.448a.937.937 0 01.438 1.29zm.127-3.44C15.515 8.523 10.055 8.34 6.958 9.284a1.125 1.125 0 01-.658-2.151c3.584-1.097 9.542-.885 13.306 1.47a1.124 1.124 0 01-1.434 1.73z"/></svg>' },
-    appleMusic: { label: 'Apple Music',  icon: '<svg viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.08.79-.093 1.18 0 .05-.008.103-.012.154v11.899c.01.16.018.32.028.48.058.894.292 1.72.786 2.465.749 1.14 1.8 1.83 3.14 2.07.418.07.839.103 1.265.107h11.564c.483-.012.963-.048 1.434-.14 1.272-.253 2.282-.917 3.002-1.997.4-.598.615-1.266.695-1.974.044-.386.058-.773.058-1.16l.002-12.066c0-.053-.004-.104-.006-.155zm-5.73 9.975l-1.57.87-1.28.71-1.35.75V11.38c0-.39-.22-.74-.56-.93-.34-.18-.76-.18-1.1.01l-3.25 1.8c-.34.19-.55.55-.55.93v7.16l-1.02-.56V4.93l9.68 2.83v8.34z"/></svg>' },
-    youtube:    { label: 'YouTube Music',icon: '<svg viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>' },
-    deezer:     { label: 'Deezer',       icon: '<svg viewBox="0 0 24 24"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.03h5.19V8.38H6.27zm6.27 0v3.03h5.19V8.38h-5.19zm6.27 0v3.03H24V8.38h-5.19zM6.27 12.6v3.04h5.19V12.6H6.27zm6.27 0v3.04h5.19V12.6h-5.19zm6.27 0v3.04H24V12.6h-5.19zM0 16.81v3.03h5.19v-3.03H0zm6.27 0v3.03h5.19v-3.03H6.27zm6.27 0v3.03h5.19v-3.03h-5.19zm6.27 0v3.03H24v-3.03h-5.19z"/></svg>' },
+  const platforms = {
+    spotify: {
+      label: 'Spotify',
+      icon: '<svg class="stream-btn__icon" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.563 17.317a.75.75 0 01-1.032.249C13.838 15.7 10.613 15.3 7.21 16.1a.75.75 0 01-.353-1.456c3.717-.9 7.268-.514 10.008 1.044a.75.75 0 01.698 1.629zm1.482-3.303a.937.937 0 01-1.29.31c-2.896-1.78-7.312-2.296-10.733-1.257a.937.937 0 01-.545-1.791c3.914-1.19 8.777-.608 12.13 1.448a.937.937 0 01.438 1.29zm.127-3.44C15.515 8.523 10.055 8.34 6.958 9.284a1.125 1.125 0 01-.658-2.151c3.584-1.097 9.542-.885 13.306 1.47a1.124 1.124 0 01-1.434 1.73z"/></svg>'
+    },
+    appleMusic: {
+      label: 'Apple Music',
+      icon: '<svg class="stream-btn__icon" viewBox="0 0 24 24"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208c-.192.448-.292.925-.363 1.408-.056.392-.08.79-.093 1.18 0 .05-.008.103-.012.154v11.899c.01.16.018.32.028.48.058.894.292 1.72.786 2.465.749 1.14 1.8 1.83 3.14 2.07.418.07.839.103 1.265.107h11.564c.483-.012.963-.048 1.434-.14 1.272-.253 2.282-.917 3.002-1.997.4-.598.615-1.266.695-1.974.044-.386.058-.773.058-1.16l.002-12.066c0-.053-.004-.104-.006-.155zm-5.73 9.975l-1.57.87-1.28.71-1.35.75V11.38c0-.39-.22-.74-.56-.93-.34-.18-.76-.18-1.1.01l-3.25 1.8c-.34.19-.55.55-.55.93v7.16l-1.02-.56V4.93l9.68 2.83v8.34z"/></svg>'
+    },
+    youtube: {
+      label: 'YouTube Music',
+      icon: '<svg class="stream-btn__icon" viewBox="0 0 24 24"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg>'
+    },
+    deezer: {
+      label: 'Deezer',
+      icon: '<svg class="stream-btn__icon" viewBox="0 0 24 24"><path d="M18.81 4.16v3.03H24V4.16h-5.19zM6.27 8.38v3.03h5.19V8.38H6.27zm6.27 0v3.03h5.19V8.38h-5.19zm6.27 0v3.03H24V8.38h-5.19zM6.27 12.6v3.04h5.19V12.6H6.27zm6.27 0v3.04h5.19V12.6h-5.19zm6.27 0v3.04H24V12.6h-5.19zM0 16.81v3.03h5.19v-3.03H0zm6.27 0v3.03h5.19v-3.03H6.27zm6.27 0v3.03h5.19v-3.03h-5.19zm6.27 0v3.03H24v-3.03h-5.19z"/></svg>'
+    },
   };
 
-  const streamsList = document.getElementById('streams-list');
+  const list = document.getElementById('stream-list');
   Object.entries(ARTIST.links).forEach(([key, url]) => {
     if (!url || url.includes('REPLACE_ME')) return;
-    const p = platformData[key];
+    const p = platforms[key];
     if (!p) return;
-    const btn = document.createElement('a');
-    btn.href = url;
-    btn.target = '_blank';
-    btn.rel = 'noopener noreferrer';
-    btn.className = 'stream-btn';
-    btn.innerHTML = `${p.icon}<span>${p.label}</span>`;
-    streamsList.appendChild(btn);
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.className = 'stream-btn';
+    a.innerHTML = `${p.icon}<span class="stream-btn__label">${p.label}</span><span class="stream-btn__arrow">→</span>`;
+    list.appendChild(a);
   });
 
   /* Spotify embed */
-  const playerWrap = document.getElementById('player-wrap');
+  const pw = document.getElementById('player-wrap');
+  const ps = document.getElementById('player-section');
   if (ARTIST.spotifyAlbumId && !ARTIST.spotifyAlbumId.includes('REPLACE_ME')) {
-    playerWrap.innerHTML = `<iframe
-      src="https://open.spotify.com/embed/album/${ARTIST.spotifyAlbumId}?utm_source=generator&theme=0"
-      height="380" frameborder="0" allowfullscreen=""
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"></iframe>`;
+    pw.innerHTML = `<iframe src="https://open.spotify.com/embed/album/${ARTIST.spotifyAlbumId}?utm_source=generator&theme=0" height="200" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
   } else {
-    playerWrap.parentElement.style.display = 'none';
-    playerWrap.closest('section').style.display = 'none';
+    ps.style.display = 'none';
+    ps.previousElementSibling.style.display = 'none';
   }
 
-  /* Bio */
-  document.getElementById('bio-text').textContent = ARTIST.bio;
-
   /* Contact */
-  const cl = document.getElementById('contact-link');
-  cl.href = `mailto:${ARTIST.contactEmail}`;
-  cl.textContent = ARTIST.contactEmail;
+  const cb = document.getElementById('contact-btn');
+  cb.href = `mailto:${ARTIST.contactEmail}`;
+  document.getElementById('contact-label').textContent = ARTIST.contactEmail;
 
   /* Footer */
-  document.getElementById('footer-name').textContent = ARTIST.name;
-  document.getElementById('footer-year').textContent = `© ${ARTIST.year}`;
-
-  /* Scroll reveal */
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-    { threshold: 0.15 }
-  );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.getElementById('footer').textContent = `© ${ARTIST.year} Samsara Wheel Records`;
 </script>
 </body>
 </html>
